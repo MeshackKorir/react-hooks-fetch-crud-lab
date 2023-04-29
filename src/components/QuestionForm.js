@@ -16,10 +16,27 @@ function QuestionForm(props) {
       [event.target.name]: event.target.value,
     });
   }
+  function FormData() {
+    const data = {
+      prompt: "",
+      answers: [],
+      correctIndex: 0
+    };
+    fetch("http://localhost:4000/questions", {
+      method: "POST" ,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => setFormData(data))
+  }
+  
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(formData);
+    console.log(FormData);
   }
 
   return (
